@@ -1,0 +1,12 @@
+[debug] > Exec(run, None, None)
+[debug] Evaluating tasks: Compile / run
+[debug] Running task... Cancel: Signal, check cycles: false, forcegc: true
+[info] compiling 1 Scala source to E:\rtScala\target\scala-2.12\classes ...
+[error] E:\rtScala\src\main\scala\rayTracer.scala:257:13: not enough arguments for method paint: (g: java.awt.Graphics)Unit.
+[error] Unspecified value parameter g.
+[error]     gg.paint()
+[error]             ^
+[error] one error found
+[error] (Compile / compileIncremental) Compilation failed
+[error] Total time: 1 s, completed May 13, 2021 1:30:47 PM
+[debug] > Exec(idea-shell, None, None)

@@ -1,0 +1,13 @@
+[debug] > Exec(run, None, None)
+[debug] Evaluating tasks: Compile / run
+[debug] Running task... Cancel: Signal, check cycles: false, forcegc: true
+[info] compiling 1 Scala source to E:\rtScala\target\scala-2.12\classes ...
+[info] done compiling
+[info] compiling 1 Scala source to E:\rtScala\target\scala-2.12\classes ...
+[error] E:\rtScala\src\main\scala\rayTracer.scala:256:7: value visi is not a member of draw.Draw
+[error]     d.visi()
+[error]       ^
+[error] one error found
+[error] (Compile / compileIncremental) Compilation failed
+[error] Total time: 1 s, completed May 13, 2021 1:42:12 PM
+[debug] > Exec(idea-shell, None, None)

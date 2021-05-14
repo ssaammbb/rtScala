@@ -1,0 +1,17 @@
+[debug] > Exec(run, None, None)
+[debug] Evaluating tasks: Compile / run
+[debug] Running task... Cancel: Signal, check cycles: false, forcegc: true
+[info] compiling 1 Scala source to E:\rtScala\target\scala-2.13\classes ...
+[error] E:\rtScala\src\main\scala\rayTracer.scala:2:14: object swing is not a member of package scala
+[error] import scala.swing._
+[error]              ^
+[error] E:\rtScala\src\main\scala\rayTracer.scala:6:14: object swing is not a member of package scala
+[error] import scala.swing.BorderPanel.Position._
+[error]              ^
+[error] E:\rtScala\src\main\scala\rayTracer.scala:7:8: not found: object event
+[error] import event._
+[error]        ^
+[error] three errors found
+[error] (Compile / compileIncremental) Compilation failed
+[error] Total time: 3 s, completed May 12, 2021 2:22:05 PM
+[debug] > Exec(idea-shell, None, None)
