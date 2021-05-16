@@ -6,83 +6,26 @@ import java.awt.image.BufferedImage
 import java.awt.Graphics
 import java.awt.Color
 
+
 import vector._
 import sphere._
 import world._
+import camera._
+import lightpaths._
+
+/*import javax.media.Processor
+import javax.media.protocol.DataSource
+import javax.media.protocol.PullBufferDataSource
+import javax.media.protocol.PullBufferDataSource._
+import javax.media.protocol.PullBufferStream
+import javax.media.DataSink
+import javax.media.datasink.DataSinkListener
+import javax.media.Buffer
+import javax.media.format.VideoFormat*/
 
 object Main extends App{
 
-  @tailrec
-  def traceHelper(world: World, origin: Vector, direction: Vector, distance: Double, ind: Int, n: Int, c: Int): (Double, Int) = {
-    if (c >= n) {
-      (distance, ind)
-    } else {
-      val d = world.spheres(c).intersect(origin, direction)
-      if (d > 0 && d < distance) {
-        traceHelper(world, origin, direction, d, c, n, c + 1)
-      } else {
-        traceHelper(world, origin, direction, distance, ind, n, c + 1)
-      }
-    }
-  }
 
-  def findCol(world: World, origin: Vector, direction: Vector, color: Vector, reflection: Double): (Vector,Vector,Vector,Double) = {
-
-    val distInd = traceHelper(world, origin, direction, 999999999, -1, world.spheres.length, 0)
-    val index = distInd._2
-    val distance = distInd._1
-
-    if (index < 0) {
-      (color, origin, direction,reflection)
-    } else {
-
-      val pz = Vector(distance, distance, distance)*direction
-      val pp = pz + origin
-      val n = (pp - world.spheres(index).center).unit()
-      val p = (n * Vector(.00001, .00001, .00001) + pp)
-      val lts = (world.lights(0).center - p).unit()
-
-      val nInt = traceHelper(world, p, lts, 999999999, -1, world.spheres.length, 0)
-
-
-      val liDist = (world.lights(0).center - pp).length()
-
-      if (nInt._1 < liDist) {
-        (color, origin, direction, reflection)
-      } else {
-        val illu = Vector(0, 0, 0)
-        val illuA = illu + (world.spheres(index).ambient * world.lights(0).ambient)
-        val illuD = illuA + (world.spheres(index).diffuse * world.lights(0).diffuse * Vector(lts % n, lts % n, lts % n))
-
-        val itc = (origin - pp).unit()
-        val h = (itc + lts).unit()
-
-        val itmp = world.spheres(index).specular * world.lights(0).specular * Vector(n % h, n % h, n % h)
-        val illuSx = math.pow(itmp.x, world.spheres(index).lum / 4)
-        val illuSy = math.pow(itmp.y, world.spheres(index).lum / 4)
-        val illuSz = math.pow(itmp.z, world.spheres(index).lum / 4)
-        val illuS = illuD + Vector(illuSx, illuSy, illuSz)
-
-        val col: Vector = color + (illuS * Vector(reflection, reflection, reflection))
-        val ref = world.spheres(index).roughness * reflection
-        val dir = direction.reflect(n)
-
-        (col, p, dir, ref)
-
-      }
-
-    }
-  }
-
-  def trace(world: World, origin: Vector, direction: Vector, c: Int, n: Int, color: Vector, reflection: Double): Vector = {
-    if(c >= n){
-      color
-    }else{
-      val th = findCol(world, origin, direction, color, reflection)
-      trace(world, th._2, th._3, c+1, n, th._1, th._4)
-    }
-
-  }
 
   @tailrec
   def renderXpassG(world: World, origin: Vector, c: Double, n: Double, y: Double, height: Double, g: Graphics, step: Double, xval: Int, yval: Int): (Graphics) = {
@@ -93,7 +36,8 @@ object Main extends App{
       val dirr = pxx-origin
       val unit = dirr.unit()
 
-      val cd: Vector = trace(world, origin, unit, 0, 5, Vector(0,0,0), 1)
+      val calcLightPaths = new lightpaths(world, origin, unit, 0, 3, Vector(0,0,0), 1)
+      val cd: Vector = calcLightPaths.callTrace()
 
 
       val cc = Vector(cd.x*255,cd.y*255,cd.z*255)
@@ -118,7 +62,7 @@ object Main extends App{
     }
   }
 
-  def renderG(world: World, width: Int, height: Int, origin: Vector): Unit = {
+  def renderG(world: World, width: Int, height: Int, origin: Vector, c: Int): Unit = {
     val size = (1920, 1080)
     val canvas = new BufferedImage(size._1, size._2, BufferedImage.TYPE_INT_RGB)
     val g = canvas.createGraphics()
@@ -133,8 +77,21 @@ object Main extends App{
 
     val gg = renderYpassG(world, origin, start, end, width, g, step, 0)
     gg.dispose()
+    val name = "Drawing" + c.toString + ".png"
 
-    javax.imageio.ImageIO.write(canvas, "png", new java.io.File("drawing.png"))
+    javax.imageio.ImageIO.write(canvas, "png", new java.io.File(name))
+  }
+
+  @tailrec
+  def m_360xy(w: World, c: Double, n: Double, pos: Vector, cam: Camera, ind: Int): Vector = {
+    if(c >= n){
+      pos
+    }else{
+      val np = cam.nextPosistion(ind)
+      renderG(w, 1920,1080,np, ind)
+      println(ind + " frames rendered\n")
+      m_360xy(w, c + (2*Math.PI)/100, n, np,  cam, ind + 1)
+    }
   }
 
   def main(): Unit = {
@@ -145,11 +102,14 @@ object Main extends App{
 
     val l = Sphere(Vector(-1, .3, .3), 1, Vector(1,1,1), Vector(.3,1,1), Vector(1,1,1), 100, 1)
 
-    val objs = List(s1, s2, s3,s)
-    val lights = List(l)
+    val objs = Array(s1, s2, s3,s)
+    val lights = Array(l)
 
     val w = World(objs, lights)
-    renderG(w, 1920,1080,Vector(0,0,1))
+    val c: Camera = Camera(simpleSphere(Vector(0,0.1,1),1))
+    renderG(w, 1920,1080,c.gizmo.center, 0)
+    //m_360xy(w, 0, 2*Math.PI, Vector(0,.1,1), c, 0)
+    //javax.media.protocol.PullBufferDataSource.
   }
   main()
 }

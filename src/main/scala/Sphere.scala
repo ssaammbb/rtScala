@@ -25,3 +25,13 @@ case class Sphere(center: Vector, radius: Double, ambient: Vector, diffuse: Vect
     Double.NaN
   }
 }
+
+case class simpleSphere(center: Vector, radius: Double){
+  def modifyRad(d: Double): simpleSphere = {
+    simpleSphere(center, d)
+  }
+
+  def modifyCen(c: Vector): simpleSphere = {
+    simpleSphere(c, radius)
+  }
+}
