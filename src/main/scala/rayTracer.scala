@@ -21,7 +21,7 @@ object Main extends App{
     val lights = Array(l)
 
     val w = World(objs, lights)
-    val cam: Camera = Camera(simpleSphere(Vector(0,0.1,1),1))
+    val cam: Camera = Camera(simpleSphere(Vector(3,0.3,3),1))
     args match{
       case("1") => {
         val r = new Renderer(w, 1920,1080,cam.gizmo.center, -1)
