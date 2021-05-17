@@ -1,57 +1,6 @@
 [debug] [zinc] IncrementalCompile -----------
 [debug] IncrementalCompile.incrementalCompile
-[debug] previous = Stamps for: 13 products, 6 sources, 1 libraries
-[debug] current source = Set(${BASE}/src/main/scala/Vector.scala, ${BASE}/src/main/scala/Camera.scala, ${BASE}/src/main/scala/Sphere.scala, ${BASE}/src/main/scala/World.scala, ${BASE}/src/main/scala/rayTracer.scala, ${BASE}/src/main/scala/Lightpaths.scala)
-[debug] > initialChanges = InitialChanges(Changes(added = Set(${BASE}/src/main/scala/Lightpaths.scala), removed = Set(${BASE}/src/main/scala/drawing.scala), changed = Set(${BASE}/src/main/scala/rayTracer.scala), unmodified = ...),Set(${BASE}/target/scala-2.12/classes/rt/Main$.class, ${BASE}/target/scala-2.12/classes/rt/Main$delayedInit$body.class, ${BASE}/target/scala-2.12/classes/rt/Main.class),Set(),API Changes: Set())
-[debug] 
-[debug] Initial source changes:
-[debug] 	removed: Set(${BASE}/src/main/scala/drawing.scala)
-[debug] 	added: Set(${BASE}/src/main/scala/Lightpaths.scala)
-[debug] 	modified: Set(${BASE}/src/main/scala/rayTracer.scala)
-[debug] Invalidated products: Set(${BASE}/target/scala-2.12/classes/rt/Main$.class, ${BASE}/target/scala-2.12/classes/rt/Main$delayedInit$body.class, ${BASE}/target/scala-2.12/classes/rt/Main.class)
-[debug] External API changes: API Changes: Set()
-[debug] Modified binary dependencies: Set()
-[debug] Initial directly invalidated classes: Set(rt.Main)
-[debug] Sources indirectly invalidated by:
-[debug] 	product: Set(${BASE}/src/main/scala/rayTracer.scala)
-[debug] 	binary dep: Set()
-[debug] 	external source: Set()
-[debug] All initially invalidated classes: Set(rt.Main)
-[debug] All initially invalidated sources:Set(${BASE}/src/main/scala/Lightpaths.scala, ${BASE}/src/main/scala/rayTracer.scala)
-[debug] Initial set of included nodes: rt.Main
-[debug] compilation cycle 1
-[info] compiling 2 Scala sources to E:\rtScala\target\scala-2.12\classes ...
-[debug] Getting org.scala-sbt:compiler-bridge_2.12:1.4.4:compile for Scala 2.12.8
-[debug] [zinc] Running cached compiler 69e694cb for Scala compiler version 2.12.8
-[debug] [zinc] The Scala compiler is invoked with:
-[debug] 	-bootclasspath
-[debug] 	C:\Program Files\Java\jre\lib\resources.jar;C:\Program Files\Java\jre\lib\rt.jar;C:\Program Files\Java\jre\lib\sunrsasign.jar;C:\Program Files\Java\jre\lib\jsse.jar;C:\Program Files\Java\jre\lib\jce.jar;C:\Program Files\Java\jre\lib\charsets.jar;C:\Program Files\Java\jre\lib\jfr.jar;C:\Program Files\Java\jre\classes;C:\Users\Sam Britten\AppData\Local\Coursier\cache\v1\https\repo1.maven.org\maven2\org\scala-lang\scala-library\2.12.8\scala-library-2.12.8.jar
-[debug] 	-classpath
-[debug] 	E:\rtScala\target\scala-2.12\classes;C:\Users\Sam Britten\AppData\Local\Coursier\cache\v1\https\repo1.maven.org\maven2\org\scala-lang\modules\scala-swing_2.12\2.0.3\scala-swing_2.12-2.0.3.jar
-[debug] Invalidating (transitively) by inheritance from rt.Main...
-[debug] Initial set of included nodes: rt.Main
-[debug] Invalidated by transitive inheritance dependency: Set(rt.Main)
-[debug] Change NamesChange(rt.Main,ModifiedNames(changes = UsedName(traceHelper,[Default]), UsedName(findCol,[Default]), UsedName(trace,[Default]))) invalidates 1 classes due to The rt.Main has the following regular definitions changed:
-[debug] 	UsedName(traceHelper,[Default]), UsedName(findCol,[Default]), UsedName(trace,[Default]).
-[debug]   > by transitive inheritance: Set(rt.Main)
-[debug]   > 
-[debug]   > 
-[debug]         
-[debug] Invalidating (transitively) by inheritance from lightpaths.lightpaths...
-[debug] Initial set of included nodes: lightpaths.lightpaths
-[debug] Invalidated by transitive inheritance dependency: Set(lightpaths.lightpaths)
-[debug] The following modified names cause invalidation of rt.Main: Set(UsedName(world,[Default]), UsedName(toString,[Default]), UsedName(callTrace,[Default]), UsedName(n,[Default]), UsedName(origin,[Default]), UsedName(lightpaths;lightpaths;init;,[Default]), UsedName(apply,[Default]), UsedName(lightpaths,[Default]), UsedName(c,[Default]))
-[debug] Change NamesChange(lightpaths.lightpaths,ModifiedNames(changes = UsedName(unapply,[Default]), UsedName($init$,[Default]), UsedName(world,[Default]), UsedName(copy$default$7,[Default]), UsedName(getClass,[Default]), UsedName(clone,[Default]), UsedName(toString,[Default]), UsedName(productPrefix,[Default]), UsedName(copy$default$5,[Default]), UsedName(productIterator,[Default]), UsedName(asInstanceOf,[Default]), UsedName(copy$default$2,[Default]), UsedName(callTrace,[Default]), UsedName(copy$default$1,[Default]), UsedName(curried,[Default]), UsedName(direction,[Default]), UsedName(n,[Default]), UsedName(isInstanceOf,[Default]), UsedName(copy$default$6,[Default]), UsedName(==,[Default]), UsedName(copy$default$4,[Default]), UsedName($isInstanceOf,[Default]), UsedName(reflection,[Default]), UsedName(origin,[Default]), UsedName(canEqual,[Default]), UsedName(copy$default$3,[Default]), UsedName(notify,[Default]), UsedName(tupled,[Default]), UsedName(hashCode,[Default]), UsedName(wait,[Default]), UsedName(eq,[Default]), UsedName(notifyAll,[Default]), UsedName(lightpaths;lightpaths;init;,[Default]), UsedName(apply,[Default]), UsedName(findCol,[Default]), UsedName(ne,[Default]), UsedName(copy,[Default]), UsedName(equals,[Default]), UsedName(synchronized,[Default]), UsedName(productElement,[Default]), UsedName($asInstanceOf,[Default]), UsedName(finalize,[Default]), UsedName(productArity,[Default]), UsedName(##,[Default]), UsedName(lightpaths,[Default]), UsedName(color,[Default]), UsedName(c,[Default]), UsedName(!=,[Default]))) invalidates 2 classes due to The lightpaths.lightpaths has the following regular definitions changed:
-[debug] 	UsedName(unapply,[Default]), UsedName($init$,[Default]), UsedName(world,[Default]), UsedName(copy$default$7,[Default]), UsedName(getClass,[Default]), UsedName(clone,[Default]), UsedName(toString,[Default]), UsedName(productPrefix,[Default]), UsedName(copy$default$5,[Default]), UsedName(productIterator,[Default]), UsedName(asInstanceOf,[Default]), UsedName(copy$default$2,[Default]), UsedName(callTrace,[Default]), UsedName(copy$default$1,[Default]), UsedName(curried,[Default]), UsedName(direction,[Default]), UsedName(n,[Default]), UsedName(isInstanceOf,[Default]), UsedName(copy$default$6,[Default]), UsedName(==,[Default]), UsedName(copy$default$4,[Default]), UsedName($isInstanceOf,[Default]), UsedName(reflection,[Default]), UsedName(origin,[Default]), UsedName(canEqual,[Default]), UsedName(copy$default$3,[Default]), UsedName(notify,[Default]), UsedName(tupled,[Default]), UsedName(hashCode,[Default]), UsedName(wait,[Default]), UsedName(eq,[Default]), UsedName(notifyAll,[Default]), UsedName(lightpaths;lightpaths;init;,[Default]), UsedName(apply,[Default]), UsedName(findCol,[Default]), UsedName(ne,[Default]), UsedName(copy,[Default]), UsedName(equals,[Default]), UsedName(synchronized,[Default]), UsedName(productElement,[Default]), UsedName($asInstanceOf,[Default]), UsedName(finalize,[Default]), UsedName(productArity,[Default]), UsedName(##,[Default]), UsedName(lightpaths,[Default]), UsedName(color,[Default]), UsedName(c,[Default]), UsedName(!=,[Default]).
-[debug]   > by transitive inheritance: Set(lightpaths.lightpaths)
-[debug]   > 
-[debug]   > by member reference: Set(rt.Main)
-[debug]         
-[debug] New invalidations:
-[debug] Initial set of included nodes: 
-[debug] Previously invalidated, but (transitively) depend on new invalidations:
-[debug] Final step, transitive dependencies:
-[debug] 	Set()
-[debug] No classes were invalidated.
-[debug] Scala compilation took 0.8009387 s
-[info] done compiling
+[debug] previous = Stamps for: 19 products, 9 sources, 1 libraries
+[debug] current source = Set(${BASE}/src/main/scala/CameraControl.scala, ${BASE}/src/main/scala/Vector.scala, ${BASE}/src/main/scala/Renderer.scala, ${BASE}/src/main/scala/Camera.scala, ${BASE}/src/main/scala/Sphere.scala, ${BASE}/src/main/scala/World.scala, ${BASE}/src/main/scala/rayTracer.scala, ${BASE}/src/main/scala/Lightpaths.scala)
+[debug] > initialChanges = InitialChanges(Changes(added = Set(), removed = Set(${BASE}/src/main/scala/drawing.scala), changed = Set(), unmodified = ...),Set(),Set(),API Changes: Set())
+[debug] No changes
