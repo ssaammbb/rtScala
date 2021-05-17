@@ -1,60 +1,24 @@
 package renderer
 
-import java.awt.{Color, Graphics}
+import java.awt.{BorderLayout, Color, Graphics, Graphics2D, Image, image}
 import java.awt.image.BufferedImage
 import java.awt.image.BufferedImageOp
+
 import javax.swing._
 import javax.swing.ImageIcon
 import javax.swing.JFrame
 import javax.swing.JLabel
 import javax.swing.JScrollPane._
-import java.awt.BorderLayout
-
 import camera.Camera
 import lightpaths.lightpaths
 import vector.Vector
 import world.World
 
 import scala.annotation.tailrec
-
 import javax.swing.JFrame
 import javax.swing.SwingUtilities
-import java.awt.Graphics2D
 import java.awt.geom.Line2D
 
-
-
-
-
-/*case class draw(bi: BufferedImage) extends JFrame("rtScala") {
-  setSize(1920, 1080)
-  setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE)
-  setLocationRelativeTo(null)
-  setVisible(true)
-
-  def drawLines(g: Graphics): Unit = {
-    val g2d = g.asInstanceOf[Graphics2D]
-
-
-    //g2d.drawImage(bi,null,0,0)
-    g2d.setColor(Color.BLACK)
-    g2d.drawLine(0,0,1000,1000)
-    repaint()
-  }
-
-  override def paint(g: Graphics): Unit = {
-    super.paint(g)
-    drawLines(g)
-  }
-
-  def setv() {
-    SwingUtilities.invokeLater(new Runnable() {
-      override def run(): Unit = {
-        setVisible(true)
-      }
-    })
-  }
-}*/
 
 
 case class Renderer(world: World, width: Int, height: Int, origin: Vector, c: Int) {
@@ -100,8 +64,8 @@ case class Renderer(world: World, width: Int, height: Int, origin: Vector, c: In
     val jf = new JFrame()
     jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE)
     jf.setSize(1920,1080)
-    jf.setIconImage(canvas)
     jf.setVisible(true)
+
     val ggg = jf.getGraphics()
     ggg.setColor(Color.white)
     ggg.fillRect(0, 0, 1920, 1080)
@@ -116,8 +80,13 @@ case class Renderer(world: World, width: Int, height: Int, origin: Vector, c: In
     val end = -1/ra
     val step = (start-end)/height
 
-    val gg = renderYpassG(world, origin, start, end, width, ggg, step, 0)
+    val gg = renderYpassG(world, origin, start, end, width, g, step, 0)
+
+    ggg.drawImage(canvas,0,0,null)
+    jf.setIconImage(canvas)
     gg.dispose()
+    ggg.dispose()
+
     val name = "E:/rtScala/RenderOutput/Drawing" + c.toString + ".png"
 
     javax.imageio.ImageIO.write(canvas, "png", new java.io.File(name))
